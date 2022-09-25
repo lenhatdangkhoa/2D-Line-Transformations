@@ -1,2 +1,2 @@
 # 2D-Line-Transformations
-Applying transformations given 2D lines
+Applying transformations such as Scale, Rotation, and Translation given 2D lines
