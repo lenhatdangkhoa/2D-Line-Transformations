@@ -4,7 +4,7 @@ if answer == 1:
     coordinates = []
     for i in range(lines):
         coordinate = []
-        print(f'line {i}')
+        print(f'line {i + 1}')
         x0 = int(input("Enter x0: "))
         y0 = int(input("Enter y0: "))
         x1 = int(input("Enter x1: "))
@@ -14,6 +14,13 @@ if answer == 1:
         coordinate.append(x1)
         coordinate.append(y1)
         coordinates.append(coordinate)
+
+    print(coordinates)
+    with open("coordinates.txt", 'w') as f:
+        for line in coordinates:
+            for point in line:
+                f.write(str(point))
+                f.write("\n")
 
 if answer == 2:
     shape = int(input("1. Square\n2.Triangle\n3.Pentagon\n"))
