@@ -1,13 +1,10 @@
-from inspect import trace
 import math
 from PIL import Image
-import numpy as np
 from transformations import *
 import math
 
-# Creating a blank dark screen
-image = Image.new(mode="RGB", size = (250, 250), color = (0,0,0))
 
+image = Image.new(mode="RGB", size = (250, 250), color = (0,0,0))
 
 def draw_basic_line(x0, y0, x1, y1):
 
@@ -45,39 +42,47 @@ def draw_basic_line(x0, y0, x1, y1):
                if (x > -1  and x < 250) and (y > -1 and y < 250):
                 image.putpixel((x,y), (255,255,255))
 
-coordinates = []
-with open("coordinates.txt") as f:
-    coordinates = f.readlines()
-    
-for i in range(len(coordinates)):
-    coordinates[i] = int(coordinates[i])
-    
-for i in range(0, len(coordinates), 4):
-    x0 = coordinates[i]
-    y0 = coordinates[i + 1]
-    x1 = coordinates[i + 2]
-    y1 = coordinates[i + 3]
-    draw_basic_line(x0, y0, x1, y1)
+def read_coordinates():
+    coordinates = []
+    with open("coordinates.txt") as f:
+        coordinates = f.readlines()
+        
+    for i in range(len(coordinates)):
+        coordinates[i] = int(coordinates[i])
+    return coordinates
 
-for i in range(0, len(coordinates), 4):
-    x0 = coordinates[i]
-    y0 = coordinates[i + 1]
-    x1 = coordinates[i + 2]
-    y1 = coordinates[i + 3]
+def show_image():
+    coordinates = read_coordinates()
+    for i in range(0, len(coordinates), 4):
+        x0 = coordinates[i]
+        y0 = coordinates[i + 1]
+        x1 = coordinates[i + 2]
+        y1 = coordinates[i + 3]
+        draw_basic_line(x0,y0,x1,y1)
+    image.show()
 
-    point1 = [x0, y0, 1]
-    point2 = [x1, y1, 1]
-    rotate_mat = rotate(-45,36,36)
-    translate_mat = basic_translate(0,0)
-    res1 = np.dot(point1, translate_mat)
-    res2 = np.dot(point2, translate_mat)
-    res1 = np.dot(res1, rotate_mat)
-    res2 = np.dot(res2, rotate_mat)
-    print(f"Point 1: {res1} Point 2: {res2}")
-    
-    print(round(res1[0]), round(res1[1]),round(res2[0]),round(res2[1]))
-    draw_basic_line(round(res1[0]), round(res1[1]), round(res2[0]), round(res2[1]))
+def read_new_coordinates():
+    coordinates = []
+    with open("new_coordinates.txt") as f:
+        coordinates = f.readlines()
+        
+    for i in range(len(coordinates)):
+        coordinates[i] = int(coordinates[i])
+    return coordinates
 
-    #draw_basic_line(x0,y0,x1,y1)
-#image.putpixel((18,53), (255,0,0))
-image.show()
+def show_new_image():
+    reset_image()
+    coordinates = read_new_coordinates()
+    for i in range(0, len(coordinates), 4):
+        x0 = coordinates[i]
+        y0 = coordinates[i + 1]
+        x1 = coordinates[i + 2]
+        y1 = coordinates[i + 3]
+        draw_basic_line(x0,y0,x1,y1)
+    image.show()
+
+def reset_image():
+    for y in range(250):
+        for x in range(250):
+            image.putpixel((x,y), (0,0,0))
+
