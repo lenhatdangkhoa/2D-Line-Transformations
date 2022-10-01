@@ -24,7 +24,6 @@ Rotate the lines by "angle" degrees clockwise assuming the center of rotation is
 """
 def basic_rotate(angle):
     rad_angle = math.radians(angle)
-    print(math.cos(rad_angle))
     matrix = ([math.cos(rad_angle), -1 * math.sin(rad_angle), 0],
               [math.sin(rad_angle), math.cos(rad_angle), 0],
               [0, 0, 1])
@@ -46,4 +45,4 @@ def rotate(angle, Cx, Cy):
     matrix = np.dot(matrix, basic_translate(Cx,Cy))
     return matrix
 
-print(rotate(45, 2, 2))    
+  
