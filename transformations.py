@@ -1,5 +1,5 @@
 import math
-import numpy as np
+import numpy as np # Scientific computing library for Python
 
 """
 Translate the lines by Tx (horizontal displacement) and Ty (vertical displacement)

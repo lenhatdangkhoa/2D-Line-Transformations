@@ -1,6 +1,10 @@
 from settings import *
 
+"""
+The main module to be executed
+"""
 answer = input("1) Draw your own lines\n2) Use the given shapes\n")
+
 if answer.strip() == '1':
     lines = int(input("How many lines do you wish to draw? "))
     store_lines(lines)
